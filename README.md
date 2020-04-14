@@ -1,6 +1,6 @@
 # EucWorldPebble
 
-![](https://i.imgur.com/TvlJg5S.gifv)
+![Demo Gif](https://i.imgur.com/TvlJg5S.gif)
 
 Android companion app source for
 
