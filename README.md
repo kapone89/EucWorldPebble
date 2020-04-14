@@ -1,4 +1,4 @@
-# WheelLogPebble
+# EucWorldPebble
 
 Android companion app source for
 
