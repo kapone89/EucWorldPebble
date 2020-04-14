@@ -26,3 +26,5 @@ Run a .pbw in an emulator
 	pebble install --emulator <aplite/basalt/chalk/diorite> path/to/app.pbw
 
 You can find example projects at https://github.com/pebble/pebble-sdk-examples and https://github.com/pebble-examples/
+
+Source, Pebble-Dev Virtual Machine at https://willow.systems/pebble/
