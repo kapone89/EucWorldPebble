@@ -1,5 +1,7 @@
 # EucWorldPebble
 
+![](https://i.imgur.com/TvlJg5S.gifv)
+
 Android companion app source for
 
 https://euc.world app!
