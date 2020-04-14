@@ -1,6 +1,8 @@
 # WheelLogPebble
 
-Android companion app source
+Android companion app source for
+
+https://euc.world app!
 
 https://github.com/JumpMaster/WheelLogAndroid/
 
