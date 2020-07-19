@@ -21,8 +21,8 @@ static int KEY_CURRENT = 13;
 // added by Lefteris Iliadis -END
 
 static int ALARM_SPEED = 0;
-static int ALARM_CURRENT = 1;
 // added by Lefteris Iliadis -START
+static int ALARM_CURRENT = 1;
 static int ALARM_VOLTAGE = 1; // ??
 // added by Lefteris Iliadis -END
 
@@ -65,6 +65,10 @@ int bt_state = 1;
 int ride_time = 1;
 int distance = 1;
 int top_speed = 1;
+// added by lefteris Iliadis -START
+int voltage = 0;
+int current = 0;
+// added by lefteris Iliadis -END
 
 int new_speed = 150;
 int new_battery = 50;
@@ -81,6 +85,10 @@ char charTemperature[5] = "";
 char charRideTime[9] = "";
 char charDistance[9] = "";
 char charTopSpeed[10] = "";
+// added by lefteris Iliadis -START
+char charVoltage[4] = "";
+char charCurrent[4] = "";
+// added by lefteris Iliadis -END
 
 int max_speed;
 bool use_mph;
@@ -132,6 +140,10 @@ TextLayer *text_layer_temperature;
 TextLayer *text_layer_ride_time;
 TextLayer *text_layer_distance;
 TextLayer *text_layer_top_speed;
+//added by Lefteris Iliadis -START
+TextLayer *text_layer_voltage;
+TextLayer *text_layer_current;
+//added by Lefteris Iliadis -END
 
 BitmapLayer *battery_bitmap_layer;
 BitmapLayer *temperature_bitmap_layer;
