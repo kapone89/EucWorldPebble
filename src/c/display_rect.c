@@ -5,6 +5,7 @@
 
 static GFont font_square_l;
 static GFont font_square_m;
+static GFont font_square_speed;
 static GFont font_square_s;
 
 TextLayer *text_layer_rt_title;
@@ -30,6 +31,7 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 
 	font_square_l = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_50));
 	font_square_m = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_20));
+	//font_square_speed = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_30)); //breals on build even if it's unloaded in the end
 	font_square_s = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_15));
 /*
 *text_layer_volt = text_layer_create(GRect(-20, 20, window_bounds.size.w, 20));
@@ -45,8 +47,9 @@ text_layer_set_font(*text_layer_current, font_square_s);
 
 	*arc_layer = layer_create(GRect(10, 25, window_bounds.size.w-20, window_bounds.size.w-20));
 
-	*text_layer_speed = text_layer_create(GRect(0, 55, window_bounds.size.w, 50));
-	text_layer_set_font(*text_layer_speed, font_square_l);
+	*text_layer_speed = text_layer_create(GRect(0, 75, window_bounds.size.w, 50));
+	text_layer_set_font(*text_layer_speed, font_square_m);
+	//text_layer_set_font(*text_layer_speed, font_square_speed); //doesn't work breaks on build
 
 	*text_layer_mph = text_layer_create(GRect(0, 103, window_bounds.size.w, 23));
 	text_layer_set_font(*text_layer_mph, font_square_m);
@@ -121,6 +124,7 @@ void destroy_display() {
 	text_layer_destroy(text_layer_ts_title);
 	fonts_unload_custom_font(font_square_s);
 	fonts_unload_custom_font(font_square_m);
+	//fonts_unload_custom_font(font_square_speed); //added for testing
 	fonts_unload_custom_font(font_square_l);
 }
 
