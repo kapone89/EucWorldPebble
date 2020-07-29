@@ -22,20 +22,23 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 
 	TextLayer **text_layer_mph, TextLayer **text_layer_battery, TextLayer **text_layer_temperature,
 	BitmapLayer **battery_bitmap_layer, BitmapLayer **temperature_bitmap_layer,BitmapLayer **bt_bitmap_layer, Layer **arc_layer,
-	TextLayer **text_layer_ride_time, TextLayer **text_layer_distance, TextLayer **text_layer_top_speed) {
+	TextLayer **text_layer_ride_time, TextLayer **text_layer_distance, TextLayer **text_layer_top_speed,
+	TextLayer** text_layer_voltage	//Added by AlexKintis	
+	) {
 
 	Layer *window_layer = window_get_root_layer(*window);
-  GRect window_bounds = layer_get_bounds(window_layer);
+  	GRect window_bounds = layer_get_bounds(window_layer);
 	*gui_layer = layer_create(window_bounds);
 	*details_layer = layer_create(window_bounds);
 
 	font_square_l = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_50));
 	font_square_m = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_20));
-	//font_square_speed = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_30)); //breals on build even if it's unloaded in the end
+	font_square_speed = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_30)); //breals on build even if it's unloaded in the end
 	font_square_s = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_15));
+
+*text_layer_voltage = text_layer_create(GRect(-20, 20, window_bounds.size.w, 20));
+text_layer_set_font(*text_layer_voltage, font_square_s);
 /*
-*text_layer_volt = text_layer_create(GRect(-20, 20, window_bounds.size.w, 20));
-text_layer_set_font(*text_layer_volt, font_square_s);
 *text_layer_current = text_layer_create(GRect(0, 20, window_bounds.size.w, 20));
 text_layer_set_font(*text_layer_current, font_square_s);
 */
@@ -49,7 +52,7 @@ text_layer_set_font(*text_layer_current, font_square_s);
 
 	*text_layer_speed = text_layer_create(GRect(0, 75, window_bounds.size.w, 50));
 	text_layer_set_font(*text_layer_speed, font_square_m);
-	//text_layer_set_font(*text_layer_speed, font_square_speed); //doesn't work breaks on build
+	text_layer_set_font(*text_layer_speed, font_square_speed); //doesn't work breaks on build
 
 	*text_layer_mph = text_layer_create(GRect(0, 103, window_bounds.size.w, 23));
 	text_layer_set_font(*text_layer_mph, font_square_m);
@@ -70,9 +73,10 @@ text_layer_set_font(*text_layer_current, font_square_s);
 	*text_layer_ride_time = text_layer_create(GRect(0, 31, window_bounds.size.w, 22));
 	text_layer_set_background_color(text_layer_rt_title, GColorClear);
 	text_layer_set_background_color(*text_layer_ride_time, GColorClear);
+
+text_layer_set_background_color(*text_layer_voltage, GColorClear);
+//text_layer_set_background_color(*text_layer_current, GColorClear);
 /*
-text_layer_set_background_color(*text_layer_volt, GColorClear);
-text_layer_set_background_color(*text_layer_current, GColorClear);
 text_layer_set_text(text_layer_volt, "V");
 text_layer_set_text(text_layer_current, "C");
 */

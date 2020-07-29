@@ -1,6 +1,7 @@
 #include <pebble.h>
 #include "display.h"
 #include "pebble_process_info.h"
+
 extern const PebbleProcessInfo __pbl_app_info;
 
 static int KEY_SPEED = 0;
@@ -16,7 +17,7 @@ static int KEY_DISTANCE = 9;
 static int KEY_TOP_SPEED = 10;
 static int KEY_READY = 11;
 // added by Lefteris Iliadis -START
-static int KEY_VOLTAGE = 12;
+static int KEY_VOLTAGE = 15;
 static int KEY_CURRENT = 13;
 // added by Lefteris Iliadis -END
 
@@ -78,6 +79,8 @@ int new_bt_state = 0;
 int new_ride_time = 0;
 int new_distance = 0;
 int new_top_speed = 0;
+int new_voltage = 12;
+int new_current = 1;
 
 char charSpeed[3] = "";
 char charBattery[5] = "";
@@ -86,8 +89,8 @@ char charRideTime[9] = "";
 char charDistance[9] = "";
 char charTopSpeed[10] = "";
 // added by lefteris Iliadis -START
-char charVoltage[4] = "";
-char charCurrent[4] = "";
+char charVoltage[5] = "";
+char charCurrent[5] = "";
 // added by lefteris Iliadis -END
 
 int max_speed;
@@ -296,6 +299,16 @@ static void send_ready() {
 }
 
 static void update_display() {
+	
+	// Setting the voltage 
+	// Added by AlexKintis
+	if(new_voltage != voltage) {
+		voltage = new_voltage;
+		snprintf(charVoltage, 5, "%dV", voltage);
+		text_layer_set_text(text_layer_voltage, charVoltage);
+	}	
+	// end
+
 
 	if (new_speed != speed) {
 		speed = new_speed;
@@ -406,11 +419,15 @@ static void update_display() {
 }
 
 static void received_handler(DictionaryIterator *iter, void *context) {
-// 	Tuple *t = dict_read_first(iter);
-// 	int a = t->key;
-// 	int b = MESSAGE_KEY_vibe_alert;
-//     APP_LOG(APP_LOG_LEVEL_INFO, "Key is %d", a);
-// 	    APP_LOG(APP_LOG_LEVEL_INFO, "Expecting %d", b);
+
+	//Viewing the keys and values of the dicrtionary // Added by AlexKint
+	/*
+ 	Tuple *t = dict_read_first(iter);
+ 	int a = t->key;
+	int b = MESSAGE_KEY_vibe_alert;
+        APP_LOG(APP_LOG_LEVEL_INFO, "Key is %d", a);
+        APP_LOG(APP_LOG_LEVEL_INFO, "Expecting %d", b);
+	*/
 
 	Tuple *speed_tuple = dict_find(iter, KEY_SPEED);
 	Tuple *temperature_tuple = dict_find(iter, KEY_TEMPERATURE);
@@ -424,6 +441,10 @@ static void received_handler(DictionaryIterator *iter, void *context) {
 	Tuple *distance_tuple = dict_find(iter, KEY_DISTANCE);
 	Tuple *top_speed_tuple = dict_find(iter, KEY_TOP_SPEED);
 	Tuple *ready_tuple = dict_find(iter, KEY_READY);
+	Tuple *voltage_tuple = dict_find(iter, KEY_VOLTAGE); // Added by AlexKint
+
+	if(voltage_tuple)  // Added by AlexKint
+		new_voltage = voltage_tuple->value->int32; 
 
 	if (ready_tuple)
 		send(MESSAGE_KEY_displayed_screen, displayed_screen);
@@ -586,7 +607,7 @@ void handle_init(void) {
 	window = window_create();
 	Layer *window_layer = window_get_root_layer(window);
 	GRect window_bounds = layer_get_bounds(window_layer);
-
+	
 	set_angles(&angle_start_deg, &angle_end_deg);
 
 	angle_start = DEG_TO_TRIGANGLE(angle_start_deg);
@@ -599,7 +620,9 @@ void handle_init(void) {
 
 	draw_display(&window, &gui_layer, &details_layer, &text_layer_time, &text_layer_speed, &text_layer_mph, &text_layer_battery, &text_layer_temperature,
 				 &battery_bitmap_layer, &temperature_bitmap_layer, &bt_bitmap_layer, &arc_layer,
-				 &text_layer_ride_time, &text_layer_distance, &text_layer_top_speed);
+				 &text_layer_ride_time, &text_layer_distance, &text_layer_top_speed,
+				 &text_layer_voltage	// Added by AlexKintis
+				 );
 
 	text_layer_set_text_alignment(text_layer_time, GTextAlignmentCenter);
 	text_layer_set_background_color(text_layer_time, GColorClear);
@@ -633,6 +656,7 @@ void handle_init(void) {
 
 	layer_set_update_proc(arc_layer, update_arcs);
 
+	//layer_add_child(gui_layer, text_layer_get_layer(text_layer_voltage)); // Added by AlexKintis
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_time));
 	layer_add_child(gui_layer, arc_layer);
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_speed));
@@ -676,6 +700,7 @@ void handle_deinit(void) {
 	text_layer_destroy(text_layer_ride_time);
 	text_layer_destroy(text_layer_distance);
 	text_layer_destroy(text_layer_top_speed);
+	text_layer_destroy(text_layer_voltage); // added by AlexKintis
 	bitmap_layer_destroy(battery_bitmap_layer);
 	bitmap_layer_destroy(temperature_bitmap_layer);
 	bitmap_layer_destroy(bt_bitmap_layer);
