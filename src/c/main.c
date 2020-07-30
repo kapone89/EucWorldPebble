@@ -18,7 +18,7 @@ static int KEY_TOP_SPEED = 10;
 static int KEY_READY = 11;
 // added by Lefteris Iliadis -START
 static int KEY_VOLTAGE = 15;
-static int KEY_CURRENT = 13;
+static int KEY_CURRENT = 16;
 // added by Lefteris Iliadis -END
 
 static int ALARM_SPEED = 0;
@@ -40,6 +40,7 @@ static char unit_mi[3] = "mi";
 // added by Lefteris Iliadis -START
 //static char unit_volt[X] = "km"; //what char?!
 static char unit_volt[2] = "V";
+static char unit_current[2] = "A";
 // added by Lefteris Iliadis -END
 
 static VibePattern vibe_speed = {
@@ -89,8 +90,8 @@ char charRideTime[9] = "";
 char charDistance[9] = "";
 char charTopSpeed[10] = "";
 // added by lefteris Iliadis -START
-char charVoltage[5] = "";
-char charCurrent[5] = "";
+char charVoltage[4] = "";
+char charCurrent[4] = "";
 // added by lefteris Iliadis -END
 
 int max_speed;
@@ -304,11 +305,19 @@ static void update_display() {
 	// Added by AlexKintis
 	if(new_voltage != voltage) {
 		voltage = new_voltage;
-		snprintf(charVoltage, 5, "%dV", voltage);
+		snprintf(charVoltage, 4, "%2d%s", voltage, unit_volt);
 		text_layer_set_text(text_layer_voltage, charVoltage);
 	}	
 	// end
 
+	// Setting the current 
+	// Added by AlexKintis
+	if(new_current != current) {
+		current = new_current;
+		snprintf(charCurrent, 4, "%2d%s", current, unit_current);
+		text_layer_set_text(text_layer_current, charCurrent);
+	}	
+	// end
 
 	if (new_speed != speed) {
 		speed = new_speed;
@@ -420,7 +429,7 @@ static void update_display() {
 
 static void received_handler(DictionaryIterator *iter, void *context) {
 
-	//Viewing the keys and values of the dicrtionary // Added by AlexKint
+	//Viewing the keys and values of the dicrtionary // Added by AlexKintis
 	/*
  	Tuple *t = dict_read_first(iter);
  	int a = t->key;
@@ -441,9 +450,13 @@ static void received_handler(DictionaryIterator *iter, void *context) {
 	Tuple *distance_tuple = dict_find(iter, KEY_DISTANCE);
 	Tuple *top_speed_tuple = dict_find(iter, KEY_TOP_SPEED);
 	Tuple *ready_tuple = dict_find(iter, KEY_READY);
-	Tuple *voltage_tuple = dict_find(iter, KEY_VOLTAGE); // Added by AlexKint
+	Tuple *voltage_tuple = dict_find(iter, KEY_VOLTAGE); // Added by AlexKintis
+	Tuple *current_tuple = dict_find(iter, KEY_CURRENT); // Added by AlexKintis
+	
+	if(current_tuple) // Added by AlexKintis
+		new_current = current_tuple->value->int32;
 
-	if(voltage_tuple)  // Added by AlexKint
+	if(voltage_tuple)  // Added by AlexKintis
 		new_voltage = voltage_tuple->value->int32; 
 
 	if (ready_tuple)
@@ -621,7 +634,7 @@ void handle_init(void) {
 	draw_display(&window, &gui_layer, &details_layer, &text_layer_time, &text_layer_speed, &text_layer_mph, &text_layer_battery, &text_layer_temperature,
 				 &battery_bitmap_layer, &temperature_bitmap_layer, &bt_bitmap_layer, &arc_layer,
 				 &text_layer_ride_time, &text_layer_distance, &text_layer_top_speed,
-				 &text_layer_voltage	// Added by AlexKintis
+				 &text_layer_voltage, &text_layer_current	// Added by AlexKintis
 				 );
 
 	text_layer_set_text_alignment(text_layer_time, GTextAlignmentCenter);
@@ -656,7 +669,8 @@ void handle_init(void) {
 
 	layer_set_update_proc(arc_layer, update_arcs);
 
-	//layer_add_child(gui_layer, text_layer_get_layer(text_layer_voltage)); // Added by AlexKintis
+	layer_add_child(gui_layer, text_layer_get_layer(text_layer_voltage)); // Added by AlexKintis
+	layer_add_child(gui_layer, text_layer_get_layer(text_layer_current)); // Added by AlexKintis
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_time));
 	layer_add_child(gui_layer, arc_layer);
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_speed));

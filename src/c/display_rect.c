@@ -23,7 +23,7 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 	TextLayer **text_layer_mph, TextLayer **text_layer_battery, TextLayer **text_layer_temperature,
 	BitmapLayer **battery_bitmap_layer, BitmapLayer **temperature_bitmap_layer,BitmapLayer **bt_bitmap_layer, Layer **arc_layer,
 	TextLayer **text_layer_ride_time, TextLayer **text_layer_distance, TextLayer **text_layer_top_speed,
-	TextLayer** text_layer_voltage	//Added by AlexKintis	
+	TextLayer** text_layer_voltage, TextLayer** text_layer_current	//Added by AlexKintis	
 	) {
 
 	Layer *window_layer = window_get_root_layer(*window);
@@ -35,14 +35,18 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 	font_square_m = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_20));
 	font_square_speed = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_30)); //breals on build even if it's unloaded in the end
 	font_square_s = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_15));
+	
+	// Setting the voltage text_layer placement into the screen // Modified by AlexKintis
+	*text_layer_voltage = text_layer_create(GRect(40, 0, window_bounds.size.w, 20));
+	text_layer_set_font(*text_layer_voltage, font_square_s);
+	// end
+	
+	// Setting the voltage text_layer placement into the screen // Modified by AlexKintis
+	*text_layer_current = text_layer_create(GRect(0, 0, window_bounds.size.w, 20));
+	text_layer_set_font(*text_layer_current, font_square_s);
+	// end
 
-*text_layer_voltage = text_layer_create(GRect(-20, 20, window_bounds.size.w, 20));
-text_layer_set_font(*text_layer_voltage, font_square_s);
-/*
-*text_layer_current = text_layer_create(GRect(0, 20, window_bounds.size.w, 20));
-text_layer_set_font(*text_layer_current, font_square_s);
-*/
-	*text_layer_time = text_layer_create(GRect(0, 44, window_bounds.size.w, 20));
+	*text_layer_time = text_layer_create(GRect(0, 50, window_bounds.size.w, 20)); // Modified by AlexKintis
 	text_layer_set_font(*text_layer_time, font_square_s);
 
 	*bt_bitmap_layer = bitmap_layer_create(GRect(window_bounds.size.w-24, 5, 24, 24));
@@ -50,7 +54,7 @@ text_layer_set_font(*text_layer_current, font_square_s);
 
 	*arc_layer = layer_create(GRect(10, 25, window_bounds.size.w-20, window_bounds.size.w-20));
 
-	*text_layer_speed = text_layer_create(GRect(0, 75, window_bounds.size.w, 50));
+	*text_layer_speed = text_layer_create(GRect(0, 70, window_bounds.size.w, 50)); // Modified by AlexKintis
 	text_layer_set_font(*text_layer_speed, font_square_m);
 	text_layer_set_font(*text_layer_speed, font_square_speed); //doesn't work breaks on build
 
@@ -73,13 +77,20 @@ text_layer_set_font(*text_layer_current, font_square_s);
 	*text_layer_ride_time = text_layer_create(GRect(0, 31, window_bounds.size.w, 22));
 	text_layer_set_background_color(text_layer_rt_title, GColorClear);
 	text_layer_set_background_color(*text_layer_ride_time, GColorClear);
+	
+	// Setting the voltage text layer font color // Modified by AlexKintis
+	text_layer_set_background_color(*text_layer_voltage, GColorClear);
+	text_layer_set_text_color(*text_layer_voltage, GColorWhite);
+	// end
+	
+	// Setting the current text layer font color // Modified by AlexKintis
+	text_layer_set_background_color(*text_layer_current, GColorClear);
+	text_layer_set_text_color(*text_layer_current, GColorWhite);
 
-text_layer_set_background_color(*text_layer_voltage, GColorClear);
-//text_layer_set_background_color(*text_layer_current, GColorClear);
-/*
-text_layer_set_text(text_layer_volt, "V");
-text_layer_set_text(text_layer_current, "C");
-*/
+	//text_layer_set_text(*text_layer_voltage, "V");
+	//text_layer_set_text(text_layer_current, "C");
+	
+	// end
 
 	text_layer_set_text_color(text_layer_rt_title, GColorWhite);
 	text_layer_set_text_color(*text_layer_ride_time, GColorLightGray);

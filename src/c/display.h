@@ -7,7 +7,7 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 	TextLayer **text_layer_mph, TextLayer **text_layer_battery, TextLayer **text_layer_temperature,
 	BitmapLayer **battery_bitmap_layer, BitmapLayer **temperature_bitmap_layer, BitmapLayer **bt_bitmap_layer, Layer **arc_layer,
 	TextLayer **text_layer_ride_time, TextLayer **text_layer_distance, TextLayer **text_layer_top_speed,
-	TextLayer** text_layer_voltage		//Added by AlexKint
+	TextLayer** text_layer_voltage, TextLayer** text_layer_current		//Added by AlexKint
 	);
 
 void destroy_display();
