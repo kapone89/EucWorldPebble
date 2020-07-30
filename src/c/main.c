@@ -17,8 +17,8 @@ static int KEY_DISTANCE = 9;
 static int KEY_TOP_SPEED = 10;
 static int KEY_READY = 11;
 // added by Lefteris Iliadis -START
-static int KEY_VOLTAGE = 15; //15
-static int KEY_CURRENT = 16; //16
+static int KEY_VOLTAGE = 12; //15
+static int KEY_CURRENT = 13; //16
 // added by Lefteris Iliadis -END
 
 static int ALARM_SPEED = 0;
