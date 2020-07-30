@@ -17,8 +17,8 @@ static int KEY_DISTANCE = 9;
 static int KEY_TOP_SPEED = 10;
 static int KEY_READY = 11;
 // added by Lefteris Iliadis -START
-static int KEY_VOLTAGE = 15;
-static int KEY_CURRENT = 16;
+static int KEY_VOLTAGE = 15; //15
+static int KEY_CURRENT = 16; //16
 // added by Lefteris Iliadis -END
 
 static int ALARM_SPEED = 0;
@@ -39,8 +39,8 @@ static char unit_km[3] = "km";
 static char unit_mi[3] = "mi";
 // added by Lefteris Iliadis -START
 //static char unit_volt[X] = "km"; //what char?!
-static char unit_volt[2] = "V";
-static char unit_current[2] = "A";
+//static char unit_volt[2] = "V";
+//static char unit_current[2] = "A";
 // added by Lefteris Iliadis -END
 
 static VibePattern vibe_speed = {
@@ -90,7 +90,7 @@ char charRideTime[9] = "";
 char charDistance[9] = "";
 char charTopSpeed[10] = "";
 // added by lefteris Iliadis -START
-char charVoltage[4] = "";
+char charVoltage[5] = "";
 char charCurrent[4] = "";
 // added by lefteris Iliadis -END
 
@@ -305,7 +305,7 @@ static void update_display() {
 	// Added by AlexKintis
 	if(new_voltage != voltage) {
 		voltage = new_voltage;
-		snprintf(charVoltage, 4, "%2d%s", voltage, unit_volt);
+		snprintf(charVoltage, 5, "%3dV", voltage);
 		text_layer_set_text(text_layer_voltage, charVoltage);
 	}	
 	// end
@@ -314,7 +314,7 @@ static void update_display() {
 	// Added by AlexKintis
 	if(new_current != current) {
 		current = new_current;
-		snprintf(charCurrent, 4, "%2d%s", current, unit_current);
+		snprintf(charCurrent, 4, "%2dA", current);
 		text_layer_set_text(text_layer_current, charCurrent);
 	}	
 	// end
@@ -630,12 +630,24 @@ void handle_init(void) {
 
 	load_persistent_data();
 	update_angles(max_speed);
-
+	
 	draw_display(&window, &gui_layer, &details_layer, &text_layer_time, &text_layer_speed, &text_layer_mph, &text_layer_battery, &text_layer_temperature,
 				 &battery_bitmap_layer, &temperature_bitmap_layer, &bt_bitmap_layer, &arc_layer,
 				 &text_layer_ride_time, &text_layer_distance, &text_layer_top_speed,
 				 &text_layer_voltage, &text_layer_current	// Added by AlexKintis
 				 );
+
+	// Initiating voltage text_layer // Added by AlexKintis
+	text_layer_set_text_alignment(text_layer_voltage, GTextAlignmentCenter);
+	text_layer_set_background_color(text_layer_voltage, GColorClear);
+	text_layer_set_text_color(text_layer_voltage, GColorWhite);
+	// end
+	
+	// Initiating current text_layer // Added by AlexKintis
+	text_layer_set_text_alignment(text_layer_current, GTextAlignmentCenter);
+	text_layer_set_background_color(text_layer_current, GColorClear);
+	text_layer_set_text_color(text_layer_current, GColorWhite);
+	// end
 
 	text_layer_set_text_alignment(text_layer_time, GTextAlignmentCenter);
 	text_layer_set_background_color(text_layer_time, GColorClear);
@@ -669,14 +681,14 @@ void handle_init(void) {
 
 	layer_set_update_proc(arc_layer, update_arcs);
 
-	layer_add_child(gui_layer, text_layer_get_layer(text_layer_voltage)); // Added by AlexKintis
-	layer_add_child(gui_layer, text_layer_get_layer(text_layer_current)); // Added by AlexKintis
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_time));
 	layer_add_child(gui_layer, arc_layer);
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_speed));
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_mph));
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_battery));
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_temperature));
+	layer_add_child(gui_layer, text_layer_get_layer(text_layer_voltage)); // Added by AlexKintis
+	layer_add_child(gui_layer, text_layer_get_layer(text_layer_current)); // Added by AlexKintis
 	layer_add_child(gui_layer, bitmap_layer_get_layer(temperature_bitmap_layer));
 	layer_add_child(gui_layer, bitmap_layer_get_layer(battery_bitmap_layer));
 	layer_add_child(gui_layer, bitmap_layer_get_layer(bt_bitmap_layer));
@@ -714,7 +726,8 @@ void handle_deinit(void) {
 	text_layer_destroy(text_layer_ride_time);
 	text_layer_destroy(text_layer_distance);
 	text_layer_destroy(text_layer_top_speed);
-	text_layer_destroy(text_layer_voltage); // added by AlexKintis
+	text_layer_destroy(text_layer_voltage); // Added by AlexKintis
+	text_layer_destroy(text_layer_current); // Added by AlexKintis
 	bitmap_layer_destroy(battery_bitmap_layer);
 	bitmap_layer_destroy(temperature_bitmap_layer);
 	bitmap_layer_destroy(bt_bitmap_layer);

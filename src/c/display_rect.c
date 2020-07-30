@@ -7,6 +7,7 @@ static GFont font_square_l;
 static GFont font_square_m;
 static GFont font_square_speed;
 static GFont font_square_s;
+static GFont font_square_volt;
 
 TextLayer *text_layer_rt_title;
 TextLayer *text_layer_d_title;
@@ -33,32 +34,32 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 
 	font_square_l = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_50));
 	font_square_m = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_20));
-	font_square_speed = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_30)); //breals on build even if it's unloaded in the end
+	font_square_speed = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_35)); // Modified by AlexKintis
+	font_square_volt = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_VOLT_17));
 	font_square_s = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_15));
 	
 	// Setting the voltage text_layer placement into the screen // Modified by AlexKintis
-	*text_layer_voltage = text_layer_create(GRect(40, 0, window_bounds.size.w, 20));
-	text_layer_set_font(*text_layer_voltage, font_square_s);
-	// end
-	
-	// Setting the voltage text_layer placement into the screen // Modified by AlexKintis
-	*text_layer_current = text_layer_create(GRect(0, 0, window_bounds.size.w, 20));
-	text_layer_set_font(*text_layer_current, font_square_s);
+	*text_layer_voltage = text_layer_create(GRect(window_bounds.size.w/4-5, 0, window_bounds.size.w, 20));
+	text_layer_set_font(*text_layer_voltage, font_square_volt);
 	// end
 
-	*text_layer_time = text_layer_create(GRect(0, 50, window_bounds.size.w, 20)); // Modified by AlexKintis
+	// Setting the current text_layer placement into the screen // Modified by AlexKintis
+	*text_layer_current = text_layer_create(GRect(0, 0, window_bounds.size.w/2-10, 20));
+	text_layer_set_font(*text_layer_current, font_square_volt);
+	// end
+
+	*text_layer_time = text_layer_create(GRect(0, 43, window_bounds.size.w, 20)); // Modified by AlexKintis
 	text_layer_set_font(*text_layer_time, font_square_s);
 
-	*bt_bitmap_layer = bitmap_layer_create(GRect(window_bounds.size.w-24, 5, 24, 24));
+	*bt_bitmap_layer = bitmap_layer_create(GRect(window_bounds.size.w-28, 24, 24, 24));
 	bitmap_layer_set_alignment(*bt_bitmap_layer, GAlignCenter);
 
-	*arc_layer = layer_create(GRect(10, 25, window_bounds.size.w-20, window_bounds.size.w-20));
+	*arc_layer = layer_create(GRect(10, 23, window_bounds.size.w-20, window_bounds.size.w-20));
 
-	*text_layer_speed = text_layer_create(GRect(0, 70, window_bounds.size.w, 50)); // Modified by AlexKintis
-	text_layer_set_font(*text_layer_speed, font_square_m);
-	text_layer_set_font(*text_layer_speed, font_square_speed); //doesn't work breaks on build
+	*text_layer_speed = text_layer_create(GRect(0, 60, window_bounds.size.w, 50)); // Modified by AlexKintis
+	text_layer_set_font(*text_layer_speed, font_square_speed); 
 
-	*text_layer_mph = text_layer_create(GRect(0, 103, window_bounds.size.w, 23));
+	*text_layer_mph = text_layer_create(GRect(0, 100, window_bounds.size.w, 23));
 	text_layer_set_font(*text_layer_mph, font_square_m);
 
 	*temperature_bitmap_layer = bitmap_layer_create(GRect(0, window_bounds.size.h-43, window_bounds.size.w/2, 20));
@@ -78,20 +79,6 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 	text_layer_set_background_color(text_layer_rt_title, GColorClear);
 	text_layer_set_background_color(*text_layer_ride_time, GColorClear);
 	
-	// Setting the voltage text layer font color // Modified by AlexKintis
-	text_layer_set_background_color(*text_layer_voltage, GColorClear);
-	text_layer_set_text_color(*text_layer_voltage, GColorWhite);
-	// end
-	
-	// Setting the current text layer font color // Modified by AlexKintis
-	text_layer_set_background_color(*text_layer_current, GColorClear);
-	text_layer_set_text_color(*text_layer_current, GColorWhite);
-
-	//text_layer_set_text(*text_layer_voltage, "V");
-	//text_layer_set_text(text_layer_current, "C");
-	
-	// end
-
 	text_layer_set_text_color(text_layer_rt_title, GColorWhite);
 	text_layer_set_text_color(*text_layer_ride_time, GColorLightGray);
 	text_layer_set_text_alignment(text_layer_rt_title, GTextAlignmentCenter);
@@ -139,7 +126,7 @@ void destroy_display() {
 	text_layer_destroy(text_layer_ts_title);
 	fonts_unload_custom_font(font_square_s);
 	fonts_unload_custom_font(font_square_m);
-	//fonts_unload_custom_font(font_square_speed); //added for testing
+	fonts_unload_custom_font(font_square_speed); 
 	fonts_unload_custom_font(font_square_l);
 }
 
