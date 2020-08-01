@@ -2,6 +2,9 @@
 
 ![Demo Gif](https://i.imgur.com/TvlJg5S.gif)
 
+Update 
+![Update](https://i.imgur.com/bXleZfX_d.webp) 
+
 Android companion app source for
 
 https://euc.world app!
