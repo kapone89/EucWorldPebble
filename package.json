@@ -21,7 +21,9 @@
             "ready",
             "start_app",
             "play_horn",
-            "displayed_screen"
+            "displayed_screen",
+            "voltage",
+            "current"
         ],
         "projectType": "native",
         "resources": {
@@ -159,9 +161,7 @@
                     ],
                     "trackingAdjust": 2,
                     "type": "font"
-<<<<<<< HEAD
-=======
-                },
+                }, 
 		{
                     "characterRegex": "[0-9]",
                     "file": "fonts/SF Square Head Bold.ttf",
@@ -173,11 +173,11 @@
                         "diorite"
                     ],
                     "type": "font"
-                },
+                }, 
 		{
-                    "characterRegex": "[0-9AV.]",
+                    "characterRegex": "[0-9AV.:]",
                     "file": "fonts/SF Square Head Bold.ttf",
-                    "name": "FONT_SQUARE_VOLT_17",
+                    "name": "FONT_SQUARE_TOP_17",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",
@@ -185,7 +185,6 @@
                         "diorite"
                     ],
                     "type": "font"
->>>>>>> parent of 61a4a85... Merge pull request #4 from AlexKintis/master
                 }
             ]
         },
@@ -203,4 +202,3 @@
         }
     },
     "version": "1.4.0"
-}
