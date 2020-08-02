@@ -175,9 +175,9 @@
                     "type": "font"
                 }, 
 		{
-                    "characterRegex": "[0-9AV.:]",
+                    "characterRegex": "[0-9AV.]",
                     "file": "fonts/SF Square Head Bold.ttf",
-                    "name": "FONT_SQUARE_TOP_17",
+                    "name": "FONT_SQUARE_VOLT_17",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",
@@ -202,3 +202,4 @@
         }
     },
     "version": "1.4.0"
+}
