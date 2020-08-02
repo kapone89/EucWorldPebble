@@ -7,7 +7,8 @@ Edit: New version with Current & Voltage display.
 Android companion app source for
 
 https://euc.world app!
-created by (Sebastian Łastowski)[https://github.com/slastowski]
+
+*created by [Sebastian Łastowski](https://github.com/slastowski)
 
 # How to install
 
