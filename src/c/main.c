@@ -69,7 +69,6 @@ int distance = 1;
 int top_speed = 1;
 // added by lefteris Iliadis -START
 int voltage = 0;
-int current = 0;
 // added by lefteris Iliadis -END
 
 int new_speed = 150;
@@ -81,7 +80,6 @@ int new_ride_time = 0;
 int new_distance = 0;
 int new_top_speed = 0;
 int new_voltage = 99999;
-int new_current = 999;
 
 char charSpeed[3] = "";
 char charBattery[5] = "";
@@ -91,7 +89,6 @@ char charDistance[9] = "";
 char charTopSpeed[10] = "";
 // added by lefteris Iliadis -START
 char charVoltage[8] = "";
-char charCurrent[7] = "";
 // added by lefteris Iliadis -END
 
 int max_speed;
@@ -146,7 +143,6 @@ TextLayer *text_layer_distance;
 TextLayer *text_layer_top_speed;
 //added by Lefteris Iliadis -START
 TextLayer *text_layer_voltage;
-TextLayer *text_layer_current;
 //added by Lefteris Iliadis -END
 
 BitmapLayer *battery_bitmap_layer;
@@ -312,19 +308,7 @@ static void update_display() {
 		text_layer_set_text(text_layer_voltage, charVoltage);
 	}	
 	// end
-
-	// Setting the current 
-	// Added by AlexKintis
-	if(new_current != current) {
-		current = new_current;
-
-		double floatCurrent= (double)current/100;
-		
-    		snprintf(charCurrent, sizeof(charCurrent), "%3d.%dA", (int)floatCurrent, (int)(floatCurrent*10)%10);
-		text_layer_set_text(text_layer_current, charCurrent);
-	}	
-	// end
-
+	
 	if (new_speed != speed) {
 		speed = new_speed;
 
@@ -457,11 +441,7 @@ static void received_handler(DictionaryIterator *iter, void *context) {
 	Tuple *top_speed_tuple = dict_find(iter, KEY_TOP_SPEED);
 	Tuple *ready_tuple = dict_find(iter, KEY_READY);
 	Tuple *voltage_tuple = dict_find(iter, KEY_VOLTAGE); // Added by AlexKintis
-	Tuple *current_tuple = dict_find(iter, KEY_CURRENT); // Added by AlexKintis
 	
-	if(current_tuple) // Added by AlexKintis
-		new_current = current_tuple->value->int32;
-
 	if(voltage_tuple)  // Added by AlexKintis
 		new_voltage = voltage_tuple->value->int32; 
 
@@ -640,7 +620,7 @@ void handle_init(void) {
 	draw_display(&window, &gui_layer, &details_layer, &text_layer_time, &text_layer_speed, &text_layer_mph, &text_layer_battery, &text_layer_temperature,
 				 &battery_bitmap_layer, &temperature_bitmap_layer, &bt_bitmap_layer, &arc_layer,
 				 &text_layer_ride_time, &text_layer_distance, &text_layer_top_speed,
-				 &text_layer_voltage, &text_layer_current	// Added by AlexKintis
+				 &text_layer_voltage // Added by AlexKintis
 				 );
 
 	// Initiating voltage text_layer // Added by AlexKintis
@@ -649,12 +629,6 @@ void handle_init(void) {
 	text_layer_set_text_color(text_layer_voltage, GColorWhite);
 	// end
 	
-	// Initiating current text_layer // Added by AlexKintis
-	text_layer_set_text_alignment(text_layer_current, GTextAlignmentCenter);
-	text_layer_set_background_color(text_layer_current, GColorClear);
-	text_layer_set_text_color(text_layer_current, GColorWhite);
-	// end
-
 	text_layer_set_text_alignment(text_layer_time, GTextAlignmentCenter);
 	text_layer_set_background_color(text_layer_time, GColorClear);
 	text_layer_set_text_color(text_layer_time, GColorWhite);
@@ -694,7 +668,6 @@ void handle_init(void) {
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_battery));
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_temperature));
 	layer_add_child(gui_layer, text_layer_get_layer(text_layer_voltage)); // Added by AlexKintis
-	layer_add_child(gui_layer, text_layer_get_layer(text_layer_current)); // Added by AlexKintis
 	layer_add_child(gui_layer, bitmap_layer_get_layer(temperature_bitmap_layer));
 	layer_add_child(gui_layer, bitmap_layer_get_layer(battery_bitmap_layer));
 	layer_add_child(gui_layer, bitmap_layer_get_layer(bt_bitmap_layer));
@@ -733,7 +706,6 @@ void handle_deinit(void) {
 	text_layer_destroy(text_layer_distance);
 	text_layer_destroy(text_layer_top_speed);
 	text_layer_destroy(text_layer_voltage); // Added by AlexKintis
-	text_layer_destroy(text_layer_current); // Added by AlexKintis
 	bitmap_layer_destroy(battery_bitmap_layer);
 	bitmap_layer_destroy(temperature_bitmap_layer);
 	bitmap_layer_destroy(bt_bitmap_layer);
