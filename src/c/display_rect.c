@@ -39,12 +39,12 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 	font_square_s = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_15));
 	
 	// Setting the voltage text_layer placement into the screen // Modified by AlexKintis
-	*text_layer_voltage = text_layer_create(GRect(window_bounds.size.w/4-5, 0, window_bounds.size.w, 20));
+	*text_layer_voltage = text_layer_create(GRect(window_bounds.size.w/4, 0, window_bounds.size.w, 20));
 	text_layer_set_font(*text_layer_voltage, font_square_volt);
 	// end
 
 	// Setting the current text_layer placement into the screen // Modified by AlexKintis
-	*text_layer_current = text_layer_create(GRect(0, 0, window_bounds.size.w/2-10, 20));
+	*text_layer_current = text_layer_create(GRect(0, 0, window_bounds.size.w/2, 20));
 	text_layer_set_font(*text_layer_current, font_square_volt);
 	// end
 

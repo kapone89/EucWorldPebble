@@ -17,8 +17,8 @@ static int KEY_DISTANCE = 9;
 static int KEY_TOP_SPEED = 10;
 static int KEY_READY = 11;
 // added by Lefteris Iliadis -START
-static int KEY_VOLTAGE = 15; //15
-static int KEY_CURRENT = 16; //16
+static int KEY_VOLTAGE = 12; //15
+static int KEY_CURRENT = 13; //16
 // added by Lefteris Iliadis -END
 
 static int ALARM_SPEED = 0;
@@ -80,8 +80,8 @@ int new_bt_state = 0;
 int new_ride_time = 0;
 int new_distance = 0;
 int new_top_speed = 0;
-int new_voltage = 12;
-int new_current = 1;
+int new_voltage = 99999;
+int new_current = 9999;
 
 char charSpeed[3] = "";
 char charBattery[5] = "";
@@ -90,8 +90,8 @@ char charRideTime[9] = "";
 char charDistance[9] = "";
 char charTopSpeed[10] = "";
 // added by lefteris Iliadis -START
-char charVoltage[5] = "";
-char charCurrent[4] = "";
+char charVoltage[8] = "";
+char charCurrent[7] = "";
 // added by lefteris Iliadis -END
 
 int max_speed;
@@ -305,7 +305,10 @@ static void update_display() {
 	// Added by AlexKintis
 	if(new_voltage != voltage) {
 		voltage = new_voltage;
-		snprintf(charVoltage, 5, "%3dV", voltage);
+
+		double floatVolt = (double)voltage/100;
+		
+    		snprintf(charVoltage, sizeof(charVoltage), "%d.%dV", (int)floatVolt, (int)(floatVolt*10)%10);
 		text_layer_set_text(text_layer_voltage, charVoltage);
 	}	
 	// end
@@ -314,7 +317,10 @@ static void update_display() {
 	// Added by AlexKintis
 	if(new_current != current) {
 		current = new_current;
-		snprintf(charCurrent, 4, "%2dA", current);
+
+		double floatCurrent= (double)current/10;
+		
+    		snprintf(charCurrent, sizeof(charCurrent), "%3d.%dA", (int)floatCurrent, (int)(floatCurrent*10)%10);
 		text_layer_set_text(text_layer_current, charCurrent);
 	}	
 	// end
