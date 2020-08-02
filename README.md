@@ -8,21 +8,17 @@ Android companion app source for
 
 https://euc.world app!
 
-*created by [Sebastian Łastowski](https://github.com/slastowski)
+created by [Sebastian Łastowski](https://github.com/slastowski)
 
 # How to install
 
 First you need to have Pebble app installed on your Android phone
 
-https://www.apkmirror.com/apk/pebble-technology-corp/pebble/pebble-4-4-2-1405-62d45d7d7-endframe-release/pebble-4-4-2-1405-62d45d7d7-endframe-android-apk-download/
+Latest mirror of the apk can be found in ApkMirror.com [HERE](https://www.apkmirror.com/apk/pebble-technology-corp/pebble/pebble-4-4-2-1405-62d45d7d7-endframe-release/pebble-4-4-2-1405-62d45d7d7-endframe-android-apk-download/) cause Pebble is discontinued.
 
-And set it up using Rebble.io
+And set it up using [Rebble.io](https://rebble.io/)
 
-https://rebble.io/
-
-Then download the EucWorldPebble.pbw of your choice. To install it use Cx File Explorer
-
-https://play.google.com/store/apps/details?id=com.cxinventor.file.explorer&hl=en_US
+Then download the EucWorldPebble.pbw of your choice from [Releases](https://github.com/Somnius/EucWorldPebble/releases). To install it use [Cx File Explorer](https://play.google.com/store/apps/details?id=com.cxinventor.file.explorer&hl=en_US)
 
 And open the pbw file with Pebble app to be able to load external app on your pebble watch.
 
