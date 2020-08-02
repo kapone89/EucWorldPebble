@@ -81,7 +81,7 @@ int new_ride_time = 0;
 int new_distance = 0;
 int new_top_speed = 0;
 int new_voltage = 99999;
-int new_current = 9999;
+int new_current = 999;
 
 char charSpeed[3] = "";
 char charBattery[5] = "";
@@ -318,7 +318,7 @@ static void update_display() {
 	if(new_current != current) {
 		current = new_current;
 
-		double floatCurrent= (double)current/10;
+		double floatCurrent= (double)current/100;
 		
     		snprintf(charCurrent, sizeof(charCurrent), "%3d.%dA", (int)floatCurrent, (int)(floatCurrent*10)%10);
 		text_layer_set_text(text_layer_current, charCurrent);
