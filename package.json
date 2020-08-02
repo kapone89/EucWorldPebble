@@ -161,7 +161,7 @@
                     "type": "font"
 <<<<<<< HEAD
 =======
-                }, 
+                },
 		{
                     "characterRegex": "[0-9]",
                     "file": "fonts/SF Square Head Bold.ttf",
@@ -173,7 +173,7 @@
                         "diorite"
                     ],
                     "type": "font"
-                }, 
+                },
 		{
                     "characterRegex": "[0-9AV.]",
                     "file": "fonts/SF Square Head Bold.ttf",
