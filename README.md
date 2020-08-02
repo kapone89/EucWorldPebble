@@ -1,6 +1,6 @@
 # EucWorldPebble
 
-Edit: New version with Current & Voltage display.
+New version with Current & Voltage display.
 
 ![Demo Gif](https://i.imgur.com/xRyoUo7.gif)
 
