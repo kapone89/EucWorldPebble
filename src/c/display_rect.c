@@ -6,7 +6,7 @@
 static GFont font_square_l;
 static GFont font_square_m;
 static GFont font_square_s;
-static GFont font_square_volt;
+static GFont font_square_top;
 
 TextLayer *text_layer_rt_title;
 TextLayer *text_layer_d_title;
@@ -33,21 +33,21 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 
 	font_square_l = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_50));
 	font_square_m = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_20));
-	font_square_volt = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_TOP_17));
+	font_square_top = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_TOP_17)); 
 	font_square_s = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_15));
 	
 	// Setting the voltage text_layer placement into the screen // Modified by AlexKintis
 	*text_layer_voltage = text_layer_create(GRect(window_bounds.size.w/4, 0, window_bounds.size.w, 20));
-	text_layer_set_font(*text_layer_voltage, font_square_volt);
+	text_layer_set_font(*text_layer_voltage, font_square_top);
 	// end
 
 	// Setting the current text_layer placement into the screen // Modified by AlexKintis
 	//*text_layer_current = text_layer_create(GRect(0, 0, window_bounds.size.w/2, 20));
-	//text_layer_set_font(*text_layer_current, font_square_volt);
+	//text_layer_set_font(*text_layer_current, font_square_top);
 	// end
 
 	*text_layer_time = text_layer_create(GRect(0, 0, window_bounds.size.w/2, 20)); // Modified by AlexKintis
-	text_layer_set_font(*text_layer_time, font_square_volt);
+	text_layer_set_font(*text_layer_time, font_square_top);
 
 	*bt_bitmap_layer = bitmap_layer_create(GRect(window_bounds.size.w-28, 24, 24, 24));
 	bitmap_layer_set_alignment(*bt_bitmap_layer, GAlignCenter);
