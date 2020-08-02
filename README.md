@@ -2,7 +2,7 @@
 
 2 New versions, one with Current & Voltage display (1.0cv) and one with Time & Voltage and Big speed gauge.
 
-![Demo Gif](https://i.imgur.com/xRyoUo7.gif) ![Demo 2 Gif](https://i.imgur.com/X7Hm6im.gif)
+![Demo Gif](https://i.imgur.com/xRyoUo7.gif) ![Demo 2 Gif](https://i.imgur.com/X7Hm6im.gif) ![Demo All Arch](https://i.imgur.com/tVHcP6w.png)
 
 Android companion app source for
 
