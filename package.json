@@ -159,6 +159,33 @@
                     ],
                     "trackingAdjust": 2,
                     "type": "font"
+<<<<<<< HEAD
+=======
+                }, 
+		{
+                    "characterRegex": "[0-9]",
+                    "file": "fonts/SF Square Head Bold.ttf",
+                    "name": "FONT_SQUARE_35",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "font"
+                }, 
+		{
+                    "characterRegex": "[0-9AV.]",
+                    "file": "fonts/SF Square Head Bold.ttf",
+                    "name": "FONT_SQUARE_VOLT_17",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "font"
+>>>>>>> parent of 61a4a85... Merge pull request #4 from AlexKintis/master
                 }
             ]
         },

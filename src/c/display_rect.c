@@ -7,7 +7,7 @@ static GFont font_square_l;
 static GFont font_square_m;
 static GFont font_square_speed;
 static GFont font_square_s;
-static GFont font_square_top;
+static GFont font_square_volt;
 
 TextLayer *text_layer_rt_title;
 TextLayer *text_layer_d_title;
@@ -24,7 +24,7 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 	TextLayer **text_layer_mph, TextLayer **text_layer_battery, TextLayer **text_layer_temperature,
 	BitmapLayer **battery_bitmap_layer, BitmapLayer **temperature_bitmap_layer,BitmapLayer **bt_bitmap_layer, Layer **arc_layer,
 	TextLayer **text_layer_ride_time, TextLayer **text_layer_distance, TextLayer **text_layer_top_speed,
-	TextLayer** text_layer_voltage //Added by AlexKintis	
+	TextLayer** text_layer_voltage, TextLayer** text_layer_current	//Added by AlexKintis	
 	) {
 
 	Layer *window_layer = window_get_root_layer(*window);
@@ -34,29 +34,30 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 
 	font_square_l = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_50));
 	font_square_m = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_20));
-	//font_square_speed = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_35)); // Modified by AlexKintis
-	font_square_top = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_TOP_17));
+	font_square_speed = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_35)); // Modified by AlexKintis
+	font_square_volt = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_VOLT_17));
 	font_square_s = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_15));
 	
 	// Setting the voltage text_layer placement into the screen // Modified by AlexKintis
 	*text_layer_voltage = text_layer_create(GRect(window_bounds.size.w/4, 0, window_bounds.size.w, 20));
-	text_layer_set_font(*text_layer_voltage, font_square_top);
+	text_layer_set_font(*text_layer_voltage, font_square_volt);
 	// end
 
 	// Setting the current text_layer placement into the screen // Modified by AlexKintis
-	//*text_layer_current = text_layer_create(GRect(0, 0, window_bounds.size.w/2, 20));
+	*text_layer_current = text_layer_create(GRect(0, 0, window_bounds.size.w/2, 20));
+	text_layer_set_font(*text_layer_current, font_square_volt);
 	// end
 
-	*text_layer_time = text_layer_create(GRect(0, 0, window_bounds.size.w/2, 20)); // Modified by AlexKintis
-	text_layer_set_font(*text_layer_time, font_square_top);
+	*text_layer_time = text_layer_create(GRect(0, 43, window_bounds.size.w, 20)); // Modified by AlexKintis
+	text_layer_set_font(*text_layer_time, font_square_s);
 
 	*bt_bitmap_layer = bitmap_layer_create(GRect(window_bounds.size.w-28, 24, 24, 24));
 	bitmap_layer_set_alignment(*bt_bitmap_layer, GAlignCenter);
 
 	*arc_layer = layer_create(GRect(10, 23, window_bounds.size.w-20, window_bounds.size.w-20));
 
-	*text_layer_speed = text_layer_create(GRect(0, 45, window_bounds.size.w, 50)); // Modified by AlexKintis
-	text_layer_set_font(*text_layer_speed, font_square_l); 
+	*text_layer_speed = text_layer_create(GRect(0, 60, window_bounds.size.w, 50)); // Modified by AlexKintis
+	text_layer_set_font(*text_layer_speed, font_square_speed); 
 
 	*text_layer_mph = text_layer_create(GRect(0, 100, window_bounds.size.w, 23));
 	text_layer_set_font(*text_layer_mph, font_square_m);
