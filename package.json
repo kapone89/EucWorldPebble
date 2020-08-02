@@ -163,21 +163,9 @@
                     "type": "font"
                 }, 
 		{
-                    "characterRegex": "[0-9]",
+                    "characterRegex": "[0-9AV.:]",
                     "file": "fonts/SF Square Head Bold.ttf",
-                    "name": "FONT_SQUARE_35",
-                    "targetPlatforms": [
-                        "aplite",
-                        "basalt",
-                        "chalk",
-                        "diorite"
-                    ],
-                    "type": "font"
-                }, 
-		{
-                    "characterRegex": "[0-9AV.]",
-                    "file": "fonts/SF Square Head Bold.ttf",
-                    "name": "FONT_SQUARE_VOLT_17",
+                    "name": "FONT_SQUARE_TOP_17",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",

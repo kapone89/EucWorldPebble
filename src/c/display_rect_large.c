@@ -20,7 +20,7 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 				  TextLayer **text_layer_mph, TextLayer **text_layer_battery, TextLayer **text_layer_temperature,
 				  BitmapLayer **battery_bitmap_layer, BitmapLayer **temperature_bitmap_layer,BitmapLayer **bt_bitmap_layer, Layer **arc_layer,
 				  TextLayer **text_layer_ride_time, TextLayer **text_layer_distance, TextLayer **text_layer_top_speed,
-			          TextLayer** text_layer_voltage, TextLayer** text_layer_current	//Added by AlexKintis	
+			          TextLayer** text_layer_voltage //Added by AlexKintis	
 				  ) {
 
 	Layer *window_layer = window_get_root_layer(*window);
@@ -32,10 +32,16 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 	font_square_m = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_25));
 	font_square_s = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SQUARE_20));
 
-	*text_layer_time = text_layer_create(GRect(0, 0, window_bounds.size.w, 25));
-	text_layer_set_font(*text_layer_time, font_square_s);
+	// Setting the voltage text_layer placement into the screen // Modified by AlexKintis
+	*text_layer_voltage = text_layer_create(GRect(window_bounds.size.w/4, 0, window_bounds.size.w, 20));
+	text_layer_set_font(*text_layer_voltage, font_square_s);
+	// end
 
-	*bt_bitmap_layer = bitmap_layer_create(GRect(window_bounds.size.w-24, 5, 24, 24));
+
+	*text_layer_time = text_layer_create(GRect(0, 0, window_bounds.size.w/2, 20)); // Modified by AlexKintis
+	text_layer_set_font(*text_layer_time, font_square_s);
+	
+	*bt_bitmap_layer = bitmap_layer_create(GRect(window_bounds.size.w-35, 28, 24, 24));
 	bitmap_layer_set_alignment(*bt_bitmap_layer, GAlignCenter);
 
 	*arc_layer = layer_create(GRect(10, 27, window_bounds.size.w-20, window_bounds.size.w-20));
