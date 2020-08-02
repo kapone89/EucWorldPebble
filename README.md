@@ -1,9 +1,8 @@
 # EucWorldPebble
 
-![Demo Gif](https://i.imgur.com/TvlJg5S.gif)
+Edit: New version with Current & Voltage display.
 
-Update 
-![Update](https://i.imgur.com/bXleZfX_d.webp) 
+![Demo Gif](https://i.imgur.com/xRyoUo7.gif)
 
 Android companion app source for
 
@@ -15,6 +14,21 @@ Forked from JumpMaster Source
 
 https://github.com/JumpMaster/WheelLogPebble
 
+# How to install
+
+First you need to have Pebble app installed on your Android phone
+
+https://www.apkmirror.com/apk/pebble-technology-corp/pebble/pebble-4-4-2-1405-62d45d7d7-endframe-release/pebble-4-4-2-1405-62d45d7d7-endframe-android-apk-download/
+
+And set it up using Rebble.io
+
+https://rebble.io/
+
+Then download the EucWorldPebble.pbw of your choice. To install it use Cx File Explorer
+
+https://play.google.com/store/apps/details?id=com.cxinventor.file.explorer&hl=en_US
+
+And open the pbw file with Pebble app to be able to load external app on your pebble watch.
 
 # Useful commands for pebble development
 
