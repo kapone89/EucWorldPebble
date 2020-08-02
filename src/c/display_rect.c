@@ -46,15 +46,15 @@ void draw_display(Window **window, Layer **gui_layer, Layer **details_layer, Tex
 	//text_layer_set_font(*text_layer_current, font_square_volt);
 	// end
 
-	*text_layer_time = text_layer_create(GRect(0, 43, window_bounds.size.w, 20)); // Modified by AlexKintis
-	text_layer_set_font(*text_layer_time, font_square_s);
+	*text_layer_time = text_layer_create(GRect(0, 0, window_bounds.size.w/2, 20)); // Modified by AlexKintis
+	text_layer_set_font(*text_layer_time, font_square_volt);
 
 	*bt_bitmap_layer = bitmap_layer_create(GRect(window_bounds.size.w-28, 24, 24, 24));
 	bitmap_layer_set_alignment(*bt_bitmap_layer, GAlignCenter);
 
-	*arc_layer = layer_create(GRect(10, 23, window_bounds.size.w-20, window_bounds.size.w-20));
+	*arc_layer = layer_create(GRect(10, 25, window_bounds.size.w-20, window_bounds.size.w-20));
 
-	*text_layer_speed = text_layer_create(GRect(0, 60, window_bounds.size.w, 50)); // Modified by AlexKintis
+	*text_layer_speed = text_layer_create(GRect(0, 45, window_bounds.size.w, 50)); // Modified by AlexKintis
 	text_layer_set_font(*text_layer_speed, font_square_l); 
 
 	*text_layer_mph = text_layer_create(GRect(0, 100, window_bounds.size.w, 23));
