@@ -579,8 +579,11 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void long_select_click_handler(ClickRecognizerRef recognizer, void *context) {
-	// Lauch the Android companion app
-	send(MESSAGE_KEY_start_app, 0);
+	send(MESSAGE_KEY_play_horn, 0);
+}
+
+static void double_select_click_handler(ClickRecognizerRef recognizer, void *context) {
+	send(MESSAGE_KEY_play_horn, 0);
 	vibes_short_pulse();
 }
 
@@ -593,10 +596,11 @@ static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
 
 static void click_config_provider(void *context) {
 	window_single_click_subscribe(BUTTON_ID_UP, up_click_handler);
-	window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
 	window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
 
+	window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
 	window_long_click_subscribe(BUTTON_ID_SELECT, 1000, long_select_click_handler, NULL);
+	window_multi_click_subscribe(BUTTON_ID_SELECT, 2, 3, 300, true, double_select_click_handler);
 }
 
 static void update_time() {
