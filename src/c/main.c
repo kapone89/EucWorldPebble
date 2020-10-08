@@ -575,15 +575,15 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-	send(MESSAGE_KEY_play_horn, 0);
+	send(MESSAGE_KEY_select_btn_single_press, 0);
 }
 
 static void long_select_click_handler(ClickRecognizerRef recognizer, void *context) {
-	send(MESSAGE_KEY_play_horn, 0);
+	send(MESSAGE_KEY_select_btn_single_press, 0);
 }
 
 static void double_select_click_handler(ClickRecognizerRef recognizer, void *context) {
-	send(MESSAGE_KEY_play_horn, 0);
+	send(MESSAGE_KEY_select_btn_single_press, 0);
 	vibes_short_pulse();
 }
 
@@ -600,7 +600,7 @@ static void click_config_provider(void *context) {
 
 	window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
 	window_long_click_subscribe(BUTTON_ID_SELECT, 1000, long_select_click_handler, NULL);
-	window_multi_click_subscribe(BUTTON_ID_SELECT, 2, 3, 300, true, double_select_click_handler);
+	window_multi_click_subscribe(BUTTON_ID_SELECT, 2, 2, 300, true, double_select_click_handler);
 }
 
 static void update_time() {
