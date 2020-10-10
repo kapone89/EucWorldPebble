@@ -22,8 +22,6 @@
             "select_btn_long_press",
             "select_btn_single_press",
             "displayed_screen",
-            "voltage",
-            "current",
             "select_btn_double_press"
         ],
         "projectType": "native",
