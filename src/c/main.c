@@ -209,19 +209,19 @@ void transition_callback(void *data) {
 
 void refresh_arc_callback(void *data) {
 
-	int increment = 1;
+	/* int increment = 1; */
+  /*  */
+	/* if (angle_current_deg < angle_target_deg && angle_target_deg-angle_current_deg >= 2) { */
+	/* 	increment = (angle_target_deg-angle_current_deg) / 2; */
+	/* 	angle_current_deg += increment > 8 ? 8 : increment; */
+	/* } else if (angle_current_deg > angle_target_deg && angle_current_deg-angle_target_deg >= 2) { */
+	/* 	increment = (angle_current_deg-angle_target_deg) / 2; */
+	/* 	angle_current_deg -= increment > 8 ? 8 : increment; */
+	/* } else { */
+	/* 	angle_current_deg = angle_target_deg; */
+	/* } */
 
-	if (angle_current_deg < angle_target_deg && angle_target_deg-angle_current_deg >= 2) {
-		increment = (angle_target_deg-angle_current_deg) / 2;
-		angle_current_deg += increment > 8 ? 8 : increment;
-	} else if (angle_current_deg > angle_target_deg && angle_current_deg-angle_target_deg >= 2) {
-		increment = (angle_current_deg-angle_target_deg) / 2;
-		angle_current_deg -= increment > 8 ? 8 : increment;
-	} else {
-		angle_current_deg = angle_target_deg;
-	}
-
-	angle_current = DEG_TO_TRIGANGLE(angle_current_deg);
+	angle_current = DEG_TO_TRIGANGLE(angle_target_deg);
 
 	layer_mark_dirty(arc_layer);
 }
@@ -264,8 +264,8 @@ static void update_arcs(Layer *layer, GContext *ctx) {
 	graphics_context_set_fill_color(ctx, GColorLightGray);
 	graphics_fill_radial(ctx, inner_bounds, GOvalScaleModeFitCircle, 2, angle_current, angle_end);
 
-	if (angle_current_deg != angle_target_deg)
-		graphics_timer = app_timer_register(30, (AppTimerCallback) refresh_arc_callback, NULL);
+	/* if (angle_current_deg != angle_target_deg) */
+	/* 	graphics_timer = app_timer_register(30, (AppTimerCallback) refresh_arc_callback, NULL); */
 }
 
 void update_angles(int max_speed) {
@@ -514,8 +514,10 @@ static void received_handler(DictionaryIterator *iter, void *context) {
 			vibes_enqueue_custom_pattern(vibe_current);
 	}
 
-	if (ride_time_tuple)
+	if (ride_time_tuple) {
 		new_ride_time = ride_time_tuple->value->int32;
+    update_display();
+  }
 
 	if (distance_tuple)
 		new_distance = distance_tuple->value->int32;
@@ -523,7 +525,7 @@ static void received_handler(DictionaryIterator *iter, void *context) {
 	if (top_speed_tuple)
 		new_top_speed = top_speed_tuple->value->int32;
 
-	update_display();
+	/* update_display(); */
 }
 
 static void start_transition() {
